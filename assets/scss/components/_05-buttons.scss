@@ -1,0 +1,20 @@
+.button{
+  background: var(--color-dark-navy);
+  display: inline-block;
+  border-radius: 25px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  text-decoration: none;
+  padding: 10px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.25s $smooth;
+  color: var(--color-white);
+  &:hover{
+    transform: scale(0.98);
+    a{
+      text-decoration: none;
+    }
+  }
+}

@@ -1,0 +1,181 @@
+<template>
+  <main>
+    <!-- <div class="title pa1">
+      <h1>{{ title }}</h1>
+    </div> -->
+    <div class="timer" v-if="timerActive" :class="{'is-finished': currentIntervalTime <= 0}">
+      <div class="timer-container pa1">
+        <div class="close-timer pa1">
+          <button class="button" @click="closeTimer">&#10005;</button>
+        </div>
+        <h1>
+          <span class="minutes">{{ minutes }}</span>
+          <span class="middle">:</span>
+          <span class="seconds">{{ seconds }}</span>
+        </h1>
+        <div class="timer-controls">
+          <div class="timer-controls-container pa1">
+            <button class="button ma-gutter05" @click="startTimer">Start</button>
+            <button class="button ma-gutter05" @click="stopTimer">Stop</button>
+            <button class="button ma-gutter05" @click="resetTimer">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else class="intervals">
+      <div class="intervals-container pa-gutter">
+        <button 
+          v-for="item in intervals" 
+          :key="item.id"
+          @click="setTimer(item.time)" 
+          class="button pa-gutter"
+          >{{ item.time }}</button>
+      </div>
+    </div>
+  </main>
+</template>
+
+<script>
+  export default {
+    data: () => ({
+      timer: null,
+      storedIntervalTime: null,
+      currentIntervalTime: null,
+      title: "Select interval",
+      timerActive: false,
+      intervals: [
+        {time: 30},
+        {time: 45},
+        {time: 60},
+        {time: 90},
+      ]
+    }),
+    methods: {
+      setTimer: function(value) {
+        this.storedIntervalTime = value;
+        this.currentIntervalTime = value;
+        this.timerActive = !this.timerActive
+      },
+      startTimer: function() {
+        this.timer = setInterval(() => this.countdown(), 1000);
+        this.title = "Let's go!"
+      },
+      stopTimer: function() {
+        clearInterval(this.timer);
+        this.timer = null;
+        this.title = "Never quit, keep going!"
+      },
+      resetTimer: function() {
+        this.currentIntervalTime = this.storedIntervalTime;
+        clearInterval(this.timer);
+        this.timer = null;
+        this.title = "Let the countdown begin!"
+      },
+      closeTimer: function() {
+        this.timerActive = !this.timerActive;
+        this.storedIntervalTime = null;
+        this.currentIntervalTime = null;
+        clearInterval(this.timer);
+        this.timer = null;
+        this.resetButton = false;
+      },
+      padTime: function(time) {
+        return (time < 10 ? '0' : '') + time;
+      },
+      countdown: function() {
+        if(this.currentIntervalTime >= 1){
+          this.currentIntervalTime--;
+        } else{
+          this.currentIntervalTime = 0;
+          // this.resetTimer()
+        }
+      },
+    },
+    computed: {
+      minutes: function() {
+        const minutes = Math.floor(this.currentIntervalTime / 60);
+        return this.padTime(minutes);
+      },
+      seconds: function() {
+        const seconds = this.currentIntervalTime - (this.minutes * 60);
+        return this.padTime(seconds);
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
+
+.app{
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.timer{
+  min-height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: var(--color-purple);
+  .timer-container{
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    .timer-controls{
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      .timer-controls-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+          .button{
+            &:hover{
+              background-color: var(--color-light-navy);
+            }
+          }
+      }
+    }
+  }
+}
+
+.timer.is-finished{
+  background-color: var(--color-lime);
+}
+
+.close-timer{
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+
+.intervals-container {
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  .button{
+    min-height: 25vh;
+    display: block;
+    margin: calc(var(--padding) / 2);
+    &:hover{
+      background:var(--color-purple);
+    }
+  }
+}
+
+</style>
+
