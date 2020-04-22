@@ -21,6 +21,9 @@
       </div>
     </div>
     <div v-else class="intervals">
+      <!-- <div class="interval-title">
+        <p class="t-center pa2">{{ title }}</p>
+      </div> -->
       <div class="intervals-container pa-gutter">
         <button 
           v-for="item in intervals" 
@@ -127,14 +130,10 @@
 </script>
 
 <style lang="scss">
-
-.app{
-  height: 100%;
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+main{
+ height: 100%;
+ width: 100%;
+ position: relative; 
 }
 .timer{
   min-height: 100vh;
@@ -181,9 +180,14 @@
 .title{
   position: absolute;
   width:100%;
+  // height: 100%;
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
+  // position: relative;
+  // top: 50%;
+  // width:100%;
+  // transform: translateY(-50%);
 }
 
 .close-timer{
@@ -202,15 +206,16 @@
   right: 0;
 }
 .intervals-container {
+  position: relative;
   margin: 0 auto;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   .button{
-    height: 25vh;
-    display: block;
+    flex: 1;
     margin: calc(var(--padding) / 2);
+    font-size: calc(1.6rem + 2vw);
   }
 }
 

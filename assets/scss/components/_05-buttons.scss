@@ -4,14 +4,14 @@
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   text-decoration: none;
-  padding: 10px 30px;
+  padding: 10px 22px;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: all 0.25s $smooth;
   color: var(--color-white);
   &:hover{
-    transform: scale(0.98);
+    // transform: scale(0.98);
     a{
       text-decoration: none;
     }
