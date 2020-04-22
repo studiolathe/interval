@@ -20,14 +20,31 @@
 
 .button--dark{
   background-color: var(--color-dark-navy);
-  &:hover{
-    background-color: var(--color-purple);
+  @media (hover: hover) {
+    &:hover{
+      background-color: var(--color-purple);
+    }
+    &:focus{
+      background-color: var(--color-purple);
+    }
+    &:active{
+      background-color: var(--color-purple);
+    }
   }
 }
 
 .button--light{
   background-color: var(--color-light-navy);
-  &:hover{
-    background-color: var(--color-dark-navy);
+  @media (hover: hover) {
+    &:hover{
+      background-color: var(--color-dark-navy);
+    }
+    &:focus{
+      background-color: var(--color-dark-navy);
+    }
+    &:active{
+      background-color: var(--color-dark-navy);
+    }
   }
+  
 }
