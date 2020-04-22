@@ -1,12 +1,9 @@
 <template>
   <main>
-    <!-- <div class=" pa1">
-      <p>{{ title }}</p>
-    </div> -->
     <div class="timer" v-if="timerActive" :class="{'is-finished': currentIntervalTime <= 0}">
       <div class="timer-container pa1">
         <div class="close-timer pa1">
-          <button class="button" @click="closeTimer">&#10005;</button>
+          <button class="button button--light" @click="closeTimer">&#10005;</button>
         </div>
         <h1 class="title" v-if="currentIntervalTime > 0">
           <span class="minutes">{{ minutes }}</span>
@@ -16,9 +13,9 @@
         <h1 class="title" v-else>{{ randomMessage.message }}</h1>
         <div class="timer-controls">
           <div class="timer-controls-container pa1">
-            <button class="button ma-gutter05" @click="startTimer">Start</button>
-            <button class="button ma-gutter05" @click="stopTimer">Stop</button>
-            <button class="button ma-gutter05" @click="resetTimer">Reset</button>
+            <button class="button button--light ma-gutter" @click="startTimer">Start</button>
+            <button class="button button--light ma-gutter" @click="stopTimer">Stop</button>
+            <button class="button button--light ma-gutter" @click="resetTimer">Reset</button>
           </div>
         </div>
       </div>
@@ -29,7 +26,7 @@
           v-for="item in intervals" 
           :key="item.id"
           @click="setTimer(item.time)" 
-          class="button pa-gutter"
+          class="button button--dark pa-gutter"
           >{{ item.time }}</button>
       </div>
     </div>
@@ -167,8 +164,9 @@
         flex-direction: row;
         justify-content: center;
           .button{
+            background-color: var(--color-light-navy);
             &:hover{
-              background-color: var(--color-light-navy);
+              background-color: var(--color-dark-navy);
             }
           }
       }
@@ -182,6 +180,7 @@
 
 .title{
   position: absolute;
+  width:100%;
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
@@ -193,6 +192,15 @@
   right: 0;
 }
 
+.intervals{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 .intervals-container {
   margin: 0 auto;
   height: 100vh;
@@ -203,9 +211,6 @@
     height: 25vh;
     display: block;
     margin: calc(var(--padding) / 2);
-    &:hover{
-      background:var(--color-purple);
-    }
   }
 }
 
