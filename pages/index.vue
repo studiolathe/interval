@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="timer" v-if="timerActive" :class="{'is-finished': currentIntervalTime <= 0}">
-      <vue100vh class="timer-container pa1" :css="{height: '100rvh'}">
+      <div class="timer-container pa1">
         <div class="close-timer pa1">
           <button class="button button--light" @click="closeTimer">&#10005;</button>
         </div>
@@ -18,7 +18,7 @@
             <button class="button button--light ma-gutter" @click="resetTimer">Reset</button>
           </div>
         </div>
-      </vue100vh>
+      </div>
     </div>
     <div v-else class="intervals">
       <!-- <div class="interval-title">
@@ -37,8 +37,6 @@
 </template>
 
 <script>
-  import vue100vh from 'vue-100vh'
-
   export default {
     data: () => ({
       timer: null,
@@ -129,7 +127,7 @@
       // }
     },
     components: { 
-      vue100vh 
+      // vue100vh 
     },
   }
 </script>
@@ -157,6 +155,7 @@ main{
     justify-content: center;
     align-content: center;
     width: 100%;
+    height: 100%;
     .timer-controls{
       position: fixed;
       bottom: 0;
