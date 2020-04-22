@@ -1,18 +1,19 @@
 <template>
   <main>
-    <!-- <div class="title pa1">
-      <h1>{{ title }}</h1>
+    <!-- <div class=" pa1">
+      <p>{{ title }}</p>
     </div> -->
     <div class="timer" v-if="timerActive" :class="{'is-finished': currentIntervalTime <= 0}">
       <div class="timer-container pa1">
         <div class="close-timer pa1">
           <button class="button" @click="closeTimer">&#10005;</button>
         </div>
-        <h1>
+        <h1 class="title" v-if="currentIntervalTime > 0">
           <span class="minutes">{{ minutes }}</span>
           <span class="middle">:</span>
           <span class="seconds">{{ seconds }}</span>
         </h1>
+        <h1 class="title" v-else>{{ randomMessage.message }}</h1>
         <div class="timer-controls">
           <div class="timer-controls-container pa1">
             <button class="button ma-gutter05" @click="startTimer">Start</button>
@@ -48,28 +49,47 @@
         {time: 45},
         {time: 60},
         {time: 90},
-      ]
+        {time: 120},
+        {time: 150},
+      ],
+      finishedMessages: [
+        {message: "Fini!", lang: "french"},
+        {message: "Finished!", lang: "english"},
+        {message: "Finito!", lang: "italian"},
+        {message: "Terminado!", lang: "spanish"}
+      ],
+      randomMessage: '',
     }),
     methods: {
+      getRandomMessage: function(){
+        let randomNumber = Math.floor(Math.random() * this.finishedMessages.length);
+        this.randomMessage = this.finishedMessages[randomNumber];
+        console.log(this.randomMessage);
+      },
       setTimer: function(value) {
         this.storedIntervalTime = value;
         this.currentIntervalTime = value;
-        this.timerActive = !this.timerActive
+        this.timerActive = !this.timerActive;
+        // this.randomMessage = '';
+        this.getRandomMessage();
       },
       startTimer: function() {
         this.timer = setInterval(() => this.countdown(), 1000);
-        this.title = "Let's go!"
+        this.title = "Let's go!";
+        this.getRandomMessage();
       },
       stopTimer: function() {
         clearInterval(this.timer);
         this.timer = null;
-        this.title = "Never quit, keep going!"
+        this.title = "Never quit, keep going!";
       },
       resetTimer: function() {
         this.currentIntervalTime = this.storedIntervalTime;
         clearInterval(this.timer);
         this.timer = null;
-        this.title = "Let the countdown begin!"
+        this.title = "Let the countdown begin!";
+        // this.randomMessage = '';
+        this.getRandomMessage();
       },
       closeTimer: function() {
         this.timerActive = !this.timerActive;
@@ -78,6 +98,7 @@
         clearInterval(this.timer);
         this.timer = null;
         this.resetButton = false;
+        this.randomMessage = '';
       },
       padTime: function(time) {
         return (time < 10 ? '0' : '') + time;
@@ -99,8 +120,12 @@
       seconds: function() {
         const seconds = this.currentIntervalTime - (this.minutes * 60);
         return this.padTime(seconds);
-      }
-    }
+      },
+      // finishedMessage: function () {
+      //   let randomMessage = Math.floor(Math.random() * this.finishedMessages.length);
+      //   return this.finishedMessages[randomMessage];
+      // }
+    },
   }
 </script>
 
@@ -155,6 +180,13 @@
   background-color: var(--color-lime);
 }
 
+.title{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
 .close-timer{
   position: fixed;
   top: 0;
@@ -163,12 +195,12 @@
 
 .intervals-container {
   margin: 0 auto;
-  min-height: 100vh;
+  height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
   .button{
-    min-height: 25vh;
+    height: 25vh;
     display: block;
     margin: calc(var(--padding) / 2);
     &:hover{

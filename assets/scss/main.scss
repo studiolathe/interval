@@ -16,9 +16,9 @@
 ========================================================================== */
 
 :root{
-  --padding: 1.5rem;
+  --padding: 1rem;
   @include breakpoint(md) {
-    --padding: 3rem;
+    --padding: 1.25rem;
   }
 
   --color-black:     #000000;
