@@ -5,12 +5,12 @@
         <div class="close-timer pa1">
           <button class="button button--light" @click="closeTimer">&#10005;</button>
         </div>
-        <h1 class="title" v-if="currentIntervalTime > 0">
+        <h1 class="title pa1" v-if="currentIntervalTime > 0">
           <span class="minutes">{{ minutes }}</span>
           <span class="middle">:</span>
           <span class="seconds">{{ seconds }}</span>
         </h1>
-        <h1 class="title" v-else>{{ randomMessage.message }}</h1>
+        <h1 class="title pa1" v-else>{{ randomMessage.message }}</h1>
         <div class="timer-controls">
           <div class="timer-controls-container pa1">
             <button class="button button--light ma-gutter" @click="startTimer">Start</button>
@@ -139,7 +139,7 @@ main{
  position: relative; 
 }
 .timer{
-  min-height: 100vh;
+  height: 100%;
   width: 100%;
   position: fixed;
   top: 0;
