@@ -24,12 +24,6 @@
     &:hover{
       background-color: var(--color-purple);
     }
-    &:focus{
-      background-color: var(--color-purple);
-    }
-    &:active{
-      background-color: var(--color-purple);
-    }
   }
 }
 
@@ -37,12 +31,6 @@
   background-color: var(--color-light-navy);
   @media (hover: hover) {
     &:hover{
-      background-color: var(--color-dark-navy);
-    }
-    &:focus{
-      background-color: var(--color-dark-navy);
-    }
-    &:active{
       background-color: var(--color-dark-navy);
     }
   }
